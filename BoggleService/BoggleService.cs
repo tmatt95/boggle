@@ -63,12 +63,6 @@ namespace BoggleService
 
         private List<Answer> AttemptNextLetter(List<LetterLocation> usedLetterLocations, string guess, int index, int column, int row)
         {
-            // If we have reached the last letter we can return blank as nothing to check.
-            if (guess.Length == index)
-            {
-                return new List<Answer>();
-            }
-
             // The character we are checking.
             var character = guess[index];
 
