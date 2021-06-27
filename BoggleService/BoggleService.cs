@@ -36,6 +36,18 @@ namespace BoggleService
 
         private Letter Check(List<LetterLocation> usedLetterLocations, int col, int row, int colCheck, int rowCheck, int index, char character)
         {
+            // Ensures we have a valid row
+            if (rowCheck < 0 || rowCheck > (board.Length - 1))
+            {
+                return null;
+            }
+
+            // Ensures we have a valid col
+            if (colCheck < 0 || colCheck > (board[row].Length - 1))
+            {
+                return null;
+            }
+
             // If the row/col check characters do not match then we dont need to go any further
             if (board[rowCheck][colCheck] != character)
             {
@@ -54,7 +66,8 @@ namespace BoggleService
             {
                 LetterIndex = index,
                 Character = character,
-                LetterLocation = new LetterLocation(){
+                LetterLocation = new LetterLocation()
+                {
                     Column = colCheck,
                     Row = rowCheck
                 }
@@ -70,83 +83,59 @@ namespace BoggleService
             var output = new List<Letter>() { };
 
             // Check left
-            if (column > 0)
+            var checkLeft = this.Check(usedLetterLocations, column, row, column - 1, row, index, character);
+            if (checkLeft != null)
             {
-                var checkLeft = this.Check(usedLetterLocations, column, row, column - 1, row, index, character);
-                if (checkLeft != null)
-                {
-                    output.Add(checkLeft);
-                }
+                output.Add(checkLeft);
             }
 
             // Check Right
-            if (column < (board[row].Length - 1))
+            var checkRight = this.Check(usedLetterLocations, column, row, column + 1, row, index, character);
+            if (checkRight != null)
             {
-                var checkRight = this.Check(usedLetterLocations, column, row, column + 1, row, index, character);
-                if (checkRight != null)
-                {
-                    output.Add(checkRight);
-                }
+                output.Add(checkRight);
             }
 
             // Check Up
-            if (row > 0)
+            var checkUp = this.Check(usedLetterLocations, column, row, column, row - 1, index, character);
+            if (checkUp != null)
             {
-                var checkUp = this.Check(usedLetterLocations, column, row, column, row - 1, index, character);
-                if (checkUp != null)
-                {
-                    output.Add(checkUp);
-                }
+                output.Add(checkUp);
             }
 
             // Check Down
-            if (row < (board.Length - 1))
+            var checkDown = this.Check(usedLetterLocations, column, row, column, row + 1, index, character);
+            if (checkDown != null)
             {
-                var checkDown = this.Check(usedLetterLocations, column, row, column, row + 1, index, character);
-                if (checkDown != null)
-                {
-                    output.Add(checkDown);
-                }
+                output.Add(checkDown);
             }
 
             // Check diagonal top left
-            if (row > 0 && column > 0)
+            var checkUpLeft = this.Check(usedLetterLocations, column, row, column - 1, row - 1, index, character);
+            if (checkUpLeft != null)
             {
-                var checkUpLeft = this.Check(usedLetterLocations, column, row, column - 1, row - 1, index, character);
-                if (checkUpLeft != null)
-                {
-                    output.Add(checkUpLeft);
-                }
+                output.Add(checkUpLeft);
             }
 
             // Check diagonal top right
-            if (row > 0 && column < (board[row].Length - 1))
+            var checkUpRight = this.Check(usedLetterLocations, column, row, column + 1, row - 1, index, character);
+            if (checkUpRight != null)
             {
-                var checkUpRight = this.Check(usedLetterLocations, column, row, column + 1, row - 1, index, character);
-                if (checkUpRight != null)
-                {
-                    output.Add(checkUpRight);
-                }
+                output.Add(checkUpRight);
             }
 
             // Check diagonal bottom left
-            if (row < board.Length - 1 && column > 0)
+            var checkDownLeft = this.Check(usedLetterLocations, column, row, column - 1, row + 1, index, character);
+            if (checkDownLeft != null)
             {
-                var checkDownLeft = this.Check(usedLetterLocations, column, row, column - 1, row + 1, index, character);
-                if (checkDownLeft != null)
-                {
-                    output.Add(checkDownLeft);
-                }
+                output.Add(checkDownLeft);
             }
 
             // Check diagonal bottom right
-            if (row < board.Length - 1 && column < (board[row].Length - 1))
+            var checkDownRight = this.Check(usedLetterLocations, column, row, column + 1, row + 1, index, character);
+            if (checkDownRight != null)
             {
-                var checkDownRight = this.Check(usedLetterLocations, column, row, column + 1, row + 1, index, character);
-                if (checkDownRight != null)
-                {
-                    output.Add(checkDownRight);
-                }
+                output.Add(checkDownRight);
             }
 
             // Return a list of all possible moves from this one
