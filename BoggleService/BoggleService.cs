@@ -8,7 +8,7 @@ namespace BoggleService
         /// <summary>
         /// Represents the boggle board.
         /// </summary>
-        private char[][] board =
+        private readonly char[][] board =
         {
            new []{'I','L','A','W'},
             new []{'B','N','G','E'},
@@ -26,7 +26,7 @@ namespace BoggleService
         {
             foreach (var nextCell in locations)
             {
-                if (nextCell.LetterIndex == guess.Count() - 1 || AttemptAnswer(guess, this.AttemptNextLetter(nextCell.UsedLetterLocations, guess, nextCell.LetterIndex + 1, nextCell.LetterLocation.Column, nextCell.LetterLocation.Row)))
+                if (nextCell.LetterIndex == guess.Length - 1 || AttemptAnswer(guess, this.AttemptNextLetter(nextCell.UsedLetterLocations, guess, nextCell.LetterIndex + 1, nextCell.LetterLocation.Column, nextCell.LetterLocation.Row)))
                 {
                     return true;
                 }
@@ -222,7 +222,7 @@ namespace BoggleService
                 }
 
                 // If we have found an answer then we dont need to loop through any more rows.
-                if (output == true)
+                if (output)
                 {
                     break;
                 }
