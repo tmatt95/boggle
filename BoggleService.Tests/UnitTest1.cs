@@ -35,5 +35,11 @@ namespace BoggleService.Tests
                 Assert.False(new BoggleService().Guess(guess));
             }
         }
+
+        [Fact]
+        public void FirstLetterNotOnBoard()
+        {
+            Assert.False(new BoggleService().Guess("ZBUNGIE"));
+        }
     }
 }
