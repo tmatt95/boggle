@@ -43,7 +43,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: bash
         run: |
-          cd Src/Application/
           ~/sonar/scanner/dotnet-sonarscanner begin /k:"tmatt95_boggle" /o:"tmatt95-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="lcov.opencover.xml"
           dotnet clean
           dotnet build
