@@ -64,7 +64,7 @@ namespace BoggleService
         private List<Answer> AttemptNextLetter(List<LetterLocation> usedLetterLocations, string guess, int index, int column, int row)
         {
             // If we have reached the last letter we can return blank as nothing to check.
-            if (guess.Count() == index)
+            if (guess.Length == index)
             {
                 return new List<Answer>();
             }
@@ -86,7 +86,7 @@ namespace BoggleService
             }
 
             // Check Right
-            if (column < (board[row].Count() - 1))
+            if (column < (board[row].Length - 1))
             {
                 var checkRight = this.Check(usedLetterLocations, column, row, column + 1, row, index, character);
                 if (checkRight != null)
@@ -106,7 +106,7 @@ namespace BoggleService
             }
 
             // Check Down
-            if (row < (board.Count() - 1))
+            if (row < (board.Length - 1))
             {
                 var checkDown = this.Check(usedLetterLocations, column, row, column, row + 1, index, character);
                 if (checkDown != null)
@@ -126,7 +126,7 @@ namespace BoggleService
             }
 
             // Check diagonal top right
-            if (row > 0 && column < (board[row].Count() - 1))
+            if (row > 0 && column < (board[row].Length - 1))
             {
                 var checkUpRight = this.Check(usedLetterLocations, column, row, column + 1, row - 1, index, character);
                 if (checkUpRight != null)
@@ -136,7 +136,7 @@ namespace BoggleService
             }
 
             // Check diagonal bottom left
-            if (row < board.Count() - 1 && column > 0)
+            if (row < board.Length - 1 && column > 0)
             {
                 var checkDownLeft = this.Check(usedLetterLocations, column, row, column - 1, row + 1, index, character);
                 if (checkDownLeft != null)
@@ -146,7 +146,7 @@ namespace BoggleService
             }
 
             // Check diagonal bottom right
-            if (row < board.Count() - 1 && column < (board[row].Count() - 1))
+            if (row < board.Length - 1 && column < (board[row].Length - 1))
             {
                 var checkDownRight = this.Check(usedLetterLocations, column, row, column + 1, row + 1, index, character);
                 if (checkDownRight != null)
@@ -170,7 +170,7 @@ namespace BoggleService
             bool output = false;
 
             // We need to ensure we have a valid guess
-            if (guess == null || guess.Count() <= 2)
+            if (guess == null || guess.Length <= 2)
             {
                 return false;
             }
