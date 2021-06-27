@@ -164,7 +164,7 @@ namespace BoggleService
             bool output = false;
 
             // We need to ensure we have a valid guess
-            if (guess == null || guess.Length <= 2)
+            if (guess == null || guess.Length < 2)
             {
                 return false;
             }
