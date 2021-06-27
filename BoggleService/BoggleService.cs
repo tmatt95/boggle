@@ -22,7 +22,7 @@ namespace BoggleService
         /// <param name="guess">The guess word.</param>
         /// <param name="locations">List of locations to search through.</param>
         /// <returns></returns>
-        private bool AttemptAnswer(string guess, List<Answer> locations)
+        private bool AttemptAnswer(string guess, List<Letter> locations)
         {
             foreach (var nextCell in locations)
             {
@@ -34,7 +34,7 @@ namespace BoggleService
             return false;
         }
 
-        private Answer Check(List<LetterLocation> usedLetterLocations, int col, int row, int colCheck, int rowCheck, int index, char character)
+        private Letter Check(List<LetterLocation> usedLetterLocations, int col, int row, int colCheck, int rowCheck, int index, char character)
         {
             // If the row/col check characters do not match then we dont need to go any further
             if (board[rowCheck][colCheck] != character)
@@ -50,10 +50,10 @@ namespace BoggleService
 
             // If we get here we can return the next cell.
             usedLetterLocations.Add(new LetterLocation() { Row = row, Column = col });
-            return new Answer(usedLetterLocations)
+            return new Letter(usedLetterLocations)
             {
                 LetterIndex = index,
-                Letter = character,
+                Character = character,
                 LetterLocation = new LetterLocation(){
                     Column = colCheck,
                     Row = rowCheck
@@ -61,13 +61,13 @@ namespace BoggleService
             };
         }
 
-        private List<Answer> AttemptNextLetter(List<LetterLocation> usedLetterLocations, string guess, int index, int column, int row)
+        private List<Letter> AttemptNextLetter(List<LetterLocation> usedLetterLocations, string guess, int index, int column, int row)
         {
             // The character we are checking.
             var character = guess[index];
 
             // Will contain a list of next locations to move to.
-            var output = new List<Answer>() { };
+            var output = new List<Letter>() { };
 
             // Check left
             if (column > 0)

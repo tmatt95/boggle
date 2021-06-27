@@ -1,5 +1,9 @@
 namespace BoggleService
 {
+
+    /// <summary>
+    /// Represents the location of the letter on the boggle board.
+    /// </summary>
     public class LetterLocation
     {
         /// <summary>
