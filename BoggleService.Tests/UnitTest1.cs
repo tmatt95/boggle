@@ -19,7 +19,7 @@ namespace BoggleService.Tests
         [Fact]
         public void ValidGuess()
         {
-            var testValidGuesses = new[] { "BINGO", "LINGO", "ILNBIA"  };
+            var testValidGuesses = new[] { "BINGO", "LINGO", "ILNBIA", "AN"  };
             foreach (var guess in testValidGuesses)
             {
                 Assert.True(new BoggleService().Guess(guess));
